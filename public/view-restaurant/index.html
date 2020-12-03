@@ -90,11 +90,11 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
                         <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                            <li class=" scroll active"><a href="#home">Página inicial</a></li>
-                            <li class="scroll"><a href="#works">Como funciona</a></li>
-                            <li class="scroll"><a href="#explore">Top 10 Restaurantes</a></li>
-                            <li class="scroll"><a href="#reviews">Feedbacks</a></li>
-                            <li class="scroll"><a href="#contacts">Contactos</a></li>
+                            <li><a href="../index.html">Página inicial</a></li>
+                            <li><a href="../index.html#works">Como funciona</a></li>
+                            <li><a href="../index.html#explore">Top 10 Restaurantes</a></li>
+                            <li><a href="../index.html#reviews">Feedbacks</a></li>
+                            <li><a href="../index.html#contacts">Contactos</a></li>
                         </ul>
                         <!--/.nav -->
                     </div><!-- /.navbar-collapse -->
@@ -127,16 +127,20 @@
                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="row">
                             <div class="col-sm-12 col-md-3 col-lg-3">
-                                <button class="btn btn-dark btn-sm">Reservar mesa</button>
+                                <a data-toggle="modal" href='#make-reservation-modal'>
+                                    <button class="btn btn-primary btn-sm">
+                                        Reservar mesa
+                                    </button>
+                                </a>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3">
-                                <button class="btn btn-light btn-sm">Encontrar no mapa</button>
+                                <button class="btn btn-default btn-sm">Encontrar no mapa</button>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3">
-                                <button class="btn btn-light btn-sm">Adicionar aos favoritos</button>
+                                <button class="btn btn-default btn-sm">Adic. aos favoritos</button>
                             </div>
                             <div class="col-sm-12 col-md-3 col-lg-3">
-                                <button class="btn btn-light btn-sm">Adicionar feedback</button>
+                                <button class="btn btn-warning btn-sm">Adic. feedback</button>
                             </div>
                         </div>
                     </div>
@@ -164,10 +168,10 @@
                     aplicáveis, se for o caso</p>
                 <h2>Mais informações</h2>
                 <p class="more-information-content mb-3">
-                    - Fornecem entradas gratis ao entrar no restaurante<br/>
-                    - Não permitem pagamentos via cartão<br/>
-                    - Parque gratuito<br/>
-                    - Não fazem take away<br/>
+                    - Fornecem entradas gratis ao entrar no restaurante<br />
+                    - Não permitem pagamentos via cartão<br />
+                    - Parque gratuito<br />
+                    - Não fazem take away<br />
                 </p>
             </div>
         </div>
@@ -225,6 +229,105 @@
 
         </div>
         <!--/.scroll-Top-->
+
+        <!-- Make Reservation in restaurant-->
+        <div class="modal fade" id="make-reservation-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Reservar mesa</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Ficou interessado neste restaurante?<br />Preencha os seus dados e aguarde uma confirmação da
+                            parte do restaurante.</p>
+                        <hr />
+                        <form role="form">
+                            <h4>Restaurante</h4>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="mr-table-selector">Escolher a mesa</label>
+                                        <select id="mr-table-selector" class="form-control">
+                                            <option value='1'>Mesa 1 -> 5 Lugares -> Custo adic. 30 EUR</option>
+                                            <option value='1'>Mesa 2 -> 3 Lugares -> Custo adic. 15 EUR</option>
+                                            <option value='1'>Mesa 3 -> 2 Lugares -> Custo adic. 10 EUR</option>
+                                            <option value='1'>Mesa 4 -> 1 Lugares -> Custo adic. 8 EUR</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="mr-first-name">Data a reservar</label>
+                                        <input type="date" class="form-control" id="mr-first-name"
+                                            placeholder="Insira a data a reservar">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="mr-last-name">Hora a reservar</label>
+                                        <input type="time" class="form-control" id="mr-last-name"
+                                            placeholder="Insira a hora a reservar">
+                                    </div>
+                                </div>
+                            </div>
+                            <h4>Cliente</h4>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="mr-first-name">Primeiro nome</label>
+                                        <input type="text" class="form-control" id="mr-first-name"
+                                            placeholder="Seu primeiro nome">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="mr-last-name">Último nome</label>
+                                        <input type="text" class="form-control" id="mr-last-name"
+                                            placeholder="Seu último nome">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="mr-email">Email</label>
+                                        <input type="email" class="form-control" id="mr-first-name"
+                                            placeholder="Seu e-mail">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label for="mr-phone-number">Nº de telefone</label>
+                                        <input type="tel" class="form-control" id="mr-phone-number"
+                                            placeholder="Seu nº de telefone">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Make Reservation in restaurant-->
+
+
+
+
 
     </footer>
     <!--/.footer-->
