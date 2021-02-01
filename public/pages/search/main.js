@@ -2,7 +2,7 @@
 var restaurant_template = (r) => `
 <div class=" col-md-4 col-sm-6">
 						<div class="single-explore-item">
-							<a href="./pages/view-restaurant/index.html?id=${r.restaurant_id}&name=${r.title}">
+							<a href="../view-restaurant/index.html?id=${r.restaurant_id}&name=${r.title}">
 								<div class="single-explore-img">
 									<img src=${r.img1 || "assets/images/explore/e1.jpg"} alt="explore image" />
 									<div class="single-explore-img-info">
@@ -37,13 +37,6 @@ var restaurant_template = (r) => `
 								</p>
 								<div class="explore-person">
 									<div class="row">
-										<div class="col-sm-2">
-											<div class="explore-person-img">
-												<a href="#">
-													<img src="assets/images/explore/person.png" alt="explore person">
-												</a>
-											</div>
-										</div>
 										<div class="col-sm-10">
 											<p>
 												${r.information}
@@ -128,51 +121,30 @@ var mock_restaurants = [
 ]
 
 window.onload = () => {
+    const _location = window.location;
+    const _params = _location.search;
+    const __params = _params.split("&");
+    const search = __params[0].replace("?", "").split("=")[1];
+    const location = __params[1].replace("?", "").split("=")[1];
+    console.log("Search and Location ::: ", search, location);
     let _base_api_url = "http://localhost:3000/api";
-    //Get location of the user on load of page
-    var node = document.getElementById("user-location");
-
-    function showPosition(position) {
-        node.innerHTML = "Latitude: " + position.coords.latitude +
-            "<br>Longitude: " + position.coords.longitude;
-    }
-    function askUserForLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            node.innerHTML = "O seu dispositivo não tem GPS!";
-        }
-    }
-    setTimeout(() => {
-        askUserForLocation();
-    }, 2000);
 
     //Get Restaurants On Load
-    fetch(_base_api_url + "/restaurants/").then(res => res.json()).then((response) => {
+    fetch(_base_api_url + `/restaurants/search/${(search && search != '' && search) || '-'}/${(location && location != '' && location) || '-'}`).then(res => res.json()).then((response) => {
         let template = "";
         let list = response.response;
         list.forEach((item) => {
             template += restaurant_template(item)
         });
-        document.getElementById("view-restaurants-list-home").innerHTML = template;
+        document.getElementById("content-view").innerHTML = template;
     }).catch((error) => {
-        //Temp ::: Set up mock data (Server might be down) - Remove afterwards
-        //Provide message
-        alert("Failed to list restaurants, Server is probably down!");
-        console.log("List On Load Restaurants - Error ::: ", error);
-        let template = "";
-        let list = mock_restaurants;
-        list.forEach((item) => {
-            template += restaurant_template(item)
-        });
-        document.getElementById("view-restaurants-list-home").innerHTML = template;
+        console.log("Server Error :: ", error);
+        document.getElementById("content-view").innerHTML = `<div class="row">
+        <div class="col-12">
+            <h2>Found <span class="quant-results">0</span> results on search for "${search}" in location "${location}"</h2>
+        </div>
+    </div>`;
     });
 
 } //!-Get location of the user on load of pagev
 
-const search_data = {};
-function searchResults(){
-    search_data["search"] = document.getElementById("search-input").value.toLowerCase();
-    search_data["location"] = document.getElementById("location-input").value.toLowerCase();
-    window.location.replace(`./pages/search/index.html?search=${search_data.search}&location=${search_data.location}`);
-}

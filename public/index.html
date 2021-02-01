@@ -127,7 +127,7 @@
 					<div class="single-welcome-hero-form">
 						<h3>O quê?</h3>
 						<form action="index.html">
-							<input type="text" placeholder="Ex: Picanhas, Hamburguers, Vegies..." />
+							<input id="search-input" type="text" placeholder="Ex: Picanhas, Hamburguers, Vegies..." />
 						</form>
 						<div class="welcome-hero-form-icon">
 							<i class="flaticon-list-with-dots"></i>
@@ -136,7 +136,7 @@
 					<div class="single-welcome-hero-form">
 						<h3>Localização</h3>
 						<form action="index.html">
-							<input type="text" placeholder="Ex: lisboa, porto, cruzeiro..." />
+							<input id="location-input" type="text" placeholder="Ex: lisboa, porto, cruzeiro..." />
 						</form>
 						<div class="welcome-hero-form-icon">
 							<i class="flaticon-gps-fixed-indicator"></i>
@@ -144,8 +144,8 @@
 					</div>
 				</div>
 				<div class="welcome-hero-serch">
-					<button class="welcome-hero-btn" onclick="window.location.href='#'">
-						pesquisar <i data-feather="search"></i>
+					<button class="welcome-hero-btn" onclick="searchResults()">
+					pesquisar <i data-feather="search"></i>
 					</button>
 				</div>
 			</div>
@@ -233,7 +233,7 @@
 				<div id="view-restaurants-list-home" class="row top-10-restaurants-list">
 					<div class=" col-md-4 col-sm-6">
 						<div class="single-explore-item">
-							<a href="./view-restaurant/index.html">
+							<a href="./pages/view-restaurant/index.html">
 								<div class="single-explore-img">
 									<img src="assets/images/explore/e1.jpg" alt="explore image" />
 									<div class="single-explore-img-info">
