@@ -46,7 +46,7 @@ var restaurant_template = (r) => `
 										</div>
 										<div class="col-sm-10">
 											<p>
-												${r.information}
+												${r.information}...
 											</p>
 										</div>
 									</div>
@@ -150,9 +150,11 @@ window.onload = () => {
     //Get Restaurants On Load
     fetch(_base_api_url + "/restaurants/").then(res => res.json()).then((response) => {
         let template = "";
-        let list = response.response;
+        let list = [...response.response];
+        list = list.slice(0, 9);
         list.forEach((item) => {
-            template += restaurant_template(item)
+            item["information"] = `${item.information}`.slice(0, 60);
+            template += restaurant_template(item);
         });
         document.getElementById("view-restaurants-list-home").innerHTML = template;
     }).catch((error) => {
@@ -171,7 +173,7 @@ window.onload = () => {
 } //!-Get location of the user on load of pagev
 
 const search_data = {};
-function searchResults(){
+function searchResults() {
     search_data["search"] = document.getElementById("search-input").value.toLowerCase();
     search_data["location"] = document.getElementById("location-input").value.toLowerCase();
     window.location.replace(`./pages/search/index.html?search=${search_data.search}&location=${search_data.location}`);

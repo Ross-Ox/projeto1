@@ -1,12 +1,12 @@
 const dbConn = require('../config/db-connection');
 var Booking = function (_booking) {
     this.client_id = _booking.client_id;
-    this.table_id = _booking.table_id;
+    this.restaurantTable_id = _booking.restaurantTable_id;
     this.reservation_date = _booking.reservation_date;
     this.reservation_time = _booking.reservation_time;
     this.status = _booking.status ? _booking.status : 1;
-    this.created_at = new Date();
-    this.updated_at = new Date();
+/*     this.created_at = new Date();
+    this.updated_at = new Date(); */
 };
 Booking.create = function (_booking) {
     return new Promise(($resolve, $reject) => {

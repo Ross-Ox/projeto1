@@ -79,6 +79,39 @@ function viewDirections() {
 }
 let restaurant = {};
 
+function emitBookingOrder() {
+    console.log("Emitting Booking ::: ");
+    let _base_api_url = "http://localhost:3000/api";
+    const selectedTable = document.getElementById("mr-table-selector").value;
+    const date = document.getElementById("mr-reservation-date").value;
+    const time = document.getElementById("mr-reservation-time").value;
+    const firstName = document.getElementById("mr-first-name").value;
+    const lastName = document.getElementById("mr-last-name").value;
+    const phone = document.getElementById("mr-phone-number").value;
+    const email = document.getElementById("mr-email").value;
+    //Setup Data
+    const request = {
+        client_id: 0,
+        restaurantTable_id: selectedTable,
+        reservation_date: date,
+        reservation_time: time,
+        client_name: `${firstName} ${lastName}`,
+        client_phone: phone,
+        client_email: email
+    };
+    console.log("Request ::: ", request);
+    //Send Booking
+    fetch(_base_api_url + "/bookings", { mode: "cors", method: "POST", body: JSON.stringify(request) }).then((res) => {
+        alert("Success on Booking!", res);
+        console.log("Booking Emitted ::: ")
+    }).catch((error) => {
+        console.log("Failed to emit booking ::: ", error);
+        alert("Failed to create booking!");
+    }).finally(() => {
+        $("#make-reservation-modal").modal('hide');
+    });
+}
+
 window.onload = () => {
     //Get ID of Restaurant and fetch all other informations
     const _location = window.location;
@@ -95,6 +128,20 @@ window.onload = () => {
         restaurant = response.response;
         coordinates = restaurant.coordinates;
         document.getElementById("explore").innerHTML = _template(restaurant);
+        return id;
+    }).then(async (_id) => {
+
+        await fetch(_base_api_url + `/tables/restaurant/${id}`, { mode: "cors", method: "GET" }).then(res => res.json()).then((response) => {
+            restaurant["tables"] = response.response;
+            let _tables = response.response;
+            let _template = ``;
+            _tables.forEach((table) => {
+                _template += `<option value='${table.restaurantTable_id}'>Mesa ${table.min_occuptation} -> ${table.max_occupation} Lugares</option>`
+            });
+            document.getElementById("mr-table-selector").innerHTML = _template;
+        });
+
+
     }).catch((error) => {
 
         console.log("List On Load Restaurants - Error ::: ", error);
