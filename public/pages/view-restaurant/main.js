@@ -92,7 +92,7 @@ function emitBookingOrder() {
     //Setup Data
     const request = {
         client_id: 0,
-        restaurantTable_id: selectedTable,
+        restaurantTable_id: parseInt(`${selectedTable}`),
         reservation_date: date,
         reservation_time: time,
         client_name: `${firstName} ${lastName}`,
@@ -101,7 +101,7 @@ function emitBookingOrder() {
     };
     console.log("Request ::: ", request);
     //Send Booking
-    fetch(_base_api_url + "/bookings", { mode: "cors", method: "POST", body: JSON.stringify(request) }).then((res) => {
+    fetch(_base_api_url + "/bookings", { mode: "cors", method: "POST", body: JSON.stringify(request), headers: new Headers({ 'content-type': 'application/json' }) }).then((res) => {
         alert("Success on Booking!", res);
         console.log("Booking Emitted ::: ")
     }).catch((error) => {

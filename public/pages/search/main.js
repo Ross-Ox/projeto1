@@ -132,8 +132,10 @@ window.onload = () => {
     //Get Restaurants On Load
     fetch(_base_api_url + `/restaurants/search/${(search && search != '' && search) || '-'}/${(location && location != '' && location) || '-'}`).then(res => res.json()).then((response) => {
         let template = "";
-        let list = response.response;
+        let list = [...response.response];
+        list = list.slice(0, 9);
         list.forEach((item) => {
+            item["information"] = `${item.information}`.slice(0, 60);
             template += restaurant_template(item)
         });
         document.getElementById("content-view").innerHTML = template;

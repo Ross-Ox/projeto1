@@ -13,7 +13,6 @@ exports.findAll = async function (req, res) {
 
 
 exports.create = async function (req, res) {
-    console.log("Creating Booking :::: ", req.body);
     const new_booking = new Booking(req.body);
     try {
         let response = await Booking.create(new_booking);
